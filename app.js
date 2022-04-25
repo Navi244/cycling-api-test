@@ -22,6 +22,14 @@ app.get('/json', function (req, res) {
     })
 });
 
+app.get('/alarm/active', (req, res)=>{
+    res.json({
+        alarm:{
+            active: true
+        }
+    })
+})
+
 app.get('/getparams/:year/:id', function(req, res){
     res.send(req.params)
 });
