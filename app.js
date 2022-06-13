@@ -16,6 +16,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/login', (req, res)=>{
+    console.log(res);
+    console.log(req);
+    res.send('Is logged')
+})
+
 app.get('/json', function (req, res) {
     res.json({
         data: 'API Get Works!'
@@ -25,6 +31,14 @@ app.get('/json', function (req, res) {
 app.get('/alarm/active', (req, res)=>{
     res.json({
         alarm:{
+            active: true
+        }
+    })
+})
+
+app.get('/light/actve', (req, res)=>{
+    res.json({
+        light:{
             active: true
         }
     })
