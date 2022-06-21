@@ -1,6 +1,20 @@
 var express = require('express');
 var app = express();
+const cors = require("cors");
 const port = process.env.PORT || 3000;
+app.use(cors());
+app.use(express.json());
+
+app.use(require("./routes/record"));
+
+const dbo = require("./db/conn");
+
+app.listen(port, () => {
+    dbo.connectToServer(function (err) {
+        if (err) console.error(err);
+    });
+    console.log(`Example app listening on port ${port}`)
+});
 
 const users = [
     {id: 1, nombre: 'Ivan'},
@@ -8,19 +22,10 @@ const users = [
     {id: 3, nombre: 'Oscar Ivan'}
 ]
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-});
-
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/login', (req, res)=>{
-    console.log(res);
-    console.log(req);
-    res.send('Is logged')
-})
 
 app.get('/json', function (req, res) {
     res.json({
